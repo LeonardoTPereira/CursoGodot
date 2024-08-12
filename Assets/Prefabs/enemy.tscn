@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://2rvk006yvodj"]
+
+[ext_resource type="Texture2D" uid="uid://dy2icsx3jrm1c" path="res://Assets/Sprites/Enemy/enemyRed1.png" id="1_txl2q"]
+[ext_resource type="Texture2D" uid="uid://btf2w604c2ue0" path="res://Assets/Sprites/Player/gun02.png" id="2_wjkvd"]
+
+[node name="Enemy" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_txl2q")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(9, -23, 13, -34, 28, -40, 44, -15, 24, 40, 12, 36, 19, 10, 14, 8, 10, 14, -11, 14, -15, 6, -19, 10, -11, 37, -25, 41, -46, -16, -28, -41, -11, -33, -10, -23)
+
+[node name="LeftGun" type="Marker2D" parent="."]
+position = Vector2(-5, 18)
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftGun"]
+z_index = -1
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_wjkvd")
+
+[node name="RightGun" type="Marker2D" parent="."]
+position = Vector2(5, 18)
+
+[node name="Sprite2D" type="Sprite2D" parent="RightGun"]
+z_index = -1
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_wjkvd")

@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://ony5f5s8ewhc"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Player.gd" id="1_1xiyr"]
+[ext_resource type="Texture2D" uid="uid://vmgfgw02eeh3" path="res://Assets/Sprites/Player/playerShip1_blue.png" id="2_aqs1h"]
+[ext_resource type="PackedScene" uid="uid://n1ykrcw1x5mr" path="res://Assets/Prefabs/bullet.tscn" id="2_oqreb"]
+[ext_resource type="Texture2D" uid="uid://de77lo0fj5tc4" path="res://Assets/Sprites/Player/gun00.png" id="4_lrkkm"]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(557, 582)
+script = ExtResource("1_1xiyr")
+my_bullet = ExtResource("2_oqreb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_aqs1h")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(6, -36, 12, -11, 36, 3, 48, -5, 45, 23, 41, 19, 13, 26, 6, 36, -6, 36, -13, 26, -42, 19, -44, 24, -48, -5, -36, 3, -11, -12, -7, -36)
+
+[node name="ShotCooldown" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="LeftGun" type="Marker2D" parent="."]
+position = Vector2(-36, -5)
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftGun"]
+z_index = -1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_lrkkm")
+
+[node name="RightGun" type="Marker2D" parent="."]
+position = Vector2(36, -5)
+
+[node name="Sprite2D" type="Sprite2D" parent="RightGun"]
+z_index = -1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_lrkkm")
+
+[connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]
