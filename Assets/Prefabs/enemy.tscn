@@ -1,30 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://2rvk006yvodj"]
+[gd_scene load_steps=6 format=3 uid="uid://djw7f07r866ia"]
 
+[ext_resource type="Script" path="res://Assets/Scripts/enemy.gd" id="1_mt7ok"]
 [ext_resource type="Texture2D" uid="uid://dy2icsx3jrm1c" path="res://Assets/Sprites/Enemy/enemyRed1.png" id="1_txl2q"]
+[ext_resource type="PackedScene" uid="uid://c2eja275c3pdl" path="res://Assets/Prefabs/enemybullet.tscn" id="2_gkeo0"]
 [ext_resource type="Texture2D" uid="uid://btf2w604c2ue0" path="res://Assets/Sprites/Player/gun02.png" id="2_wjkvd"]
+[ext_resource type="Script" path="res://Assets/Scripts/living_unit.gd" id="3_nvmw0"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_mt7ok")
+my_bullet = ExtResource("2_gkeo0")
+
+[node name="HealthController" type="Node2D" parent="."]
+scale = Vector2(1.17613, 1)
+script = ExtResource("3_nvmw0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_txl2q")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(9, -23, 13, -34, 28, -40, 44, -15, 24, 40, 12, 36, 19, 10, 14, 8, 10, 14, -11, 14, -15, 6, -19, 10, -11, 37, -25, 41, -46, -16, -28, -41, -11, -33, -10, -23)
+polygon = PackedVector2Array(10, -24, 12, -33, 28, -40, 44, -16, 24, 41, 12, 36, 19, 10, 16, 9, 11, 15, -11, 15, -15, 9, -19, 11, -12, 37, -23, 40, -45, -15, -29, -40, -11, -33, -9, -23)
 
 [node name="LeftGun" type="Marker2D" parent="."]
-position = Vector2(-5, 18)
-
-[node name="Sprite2D" type="Sprite2D" parent="LeftGun"]
 z_index = -1
+position = Vector2(-5, 18)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftGun"]
 texture = ExtResource("2_wjkvd")
 
 [node name="RightGun" type="Marker2D" parent="."]
-position = Vector2(5, 18)
-
-[node name="Sprite2D" type="Sprite2D" parent="RightGun"]
 z_index = -1
+position = Vector2(5, 18)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="RightGun"]
 texture = ExtResource("2_wjkvd")
+
+[node name="ShotCooldown" type="Timer" parent="."]
+autostart = true
+
+[connection signal="get_sprite" from="HealthController" to="." method="_on_health_controller_get_sprite"]
+[connection signal="kill_parent" from="HealthController" to="." method="_on_health_controller_kill_parent"]
+[connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]

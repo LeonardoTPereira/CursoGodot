@@ -65,3 +65,11 @@ func check_bounds_and_clamp_position():
 
 func _on_shot_cooldown_timeout():
 	can_shoot = true
+
+
+func _on_health_controller_get_sprite():
+	$HealthController.set_sprite($Sprite2D)
+
+
+func _on_health_controller_kill_parent():
+	queue_free()

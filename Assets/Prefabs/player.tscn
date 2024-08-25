@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://ony5f5s8ewhc"]
+[gd_scene load_steps=6 format=3 uid="uid://ony5f5s8ewhc"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player.gd" id="1_1xiyr"]
+[ext_resource type="Script" path="res://Assets/Scripts/living_unit.gd" id="2_17n08"]
 [ext_resource type="Texture2D" uid="uid://vmgfgw02eeh3" path="res://Assets/Sprites/Player/playerShip1_blue.png" id="2_aqs1h"]
-[ext_resource type="PackedScene" uid="uid://n1ykrcw1x5mr" path="res://Assets/Prefabs/bullet.tscn" id="2_oqreb"]
+[ext_resource type="PackedScene" uid="uid://n1ykrcw1x5mr" path="res://Assets/Prefabs/playerbullet.tscn" id="2_l1p0p"]
 [ext_resource type="Texture2D" uid="uid://de77lo0fj5tc4" path="res://Assets/Sprites/Player/gun00.png" id="4_lrkkm"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(557, 582)
 script = ExtResource("1_1xiyr")
-my_bullet = ExtResource("2_oqreb")
+my_bullet = ExtResource("2_l1p0p")
+
+[node name="HealthController" type="Node2D" parent="."]
+script = ExtResource("2_17n08")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_aqs1h")
@@ -21,19 +25,21 @@ wait_time = 0.3
 one_shot = true
 
 [node name="LeftGun" type="Marker2D" parent="."]
+z_index = -1
 position = Vector2(-36, -5)
 
 [node name="Sprite2D" type="Sprite2D" parent="LeftGun"]
-z_index = -1
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_lrkkm")
 
 [node name="RightGun" type="Marker2D" parent="."]
+z_index = -1
 position = Vector2(36, -5)
 
 [node name="Sprite2D" type="Sprite2D" parent="RightGun"]
-z_index = -1
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_lrkkm")
 
+[connection signal="get_sprite" from="HealthController" to="." method="_on_health_controller_get_sprite"]
+[connection signal="kill_parent" from="HealthController" to="." method="_on_health_controller_kill_parent"]
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]
