@@ -1,4 +1,4 @@
-class_name LivingUnit
+class_name HealthController
 extends Node2D
 
 signal get_sprite

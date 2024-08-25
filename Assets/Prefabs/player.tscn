@@ -1,28 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://ony5f5s8ewhc"]
+[gd_scene load_steps=8 format=3 uid="uid://ony5f5s8ewhc"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player.gd" id="1_1xiyr"]
-[ext_resource type="Script" path="res://Assets/Scripts/living_unit.gd" id="2_17n08"]
+[ext_resource type="Script" path="res://Assets/Scripts/health_controller.gd" id="2_17n08"]
 [ext_resource type="Texture2D" uid="uid://vmgfgw02eeh3" path="res://Assets/Sprites/Player/playerShip1_blue.png" id="2_aqs1h"]
-[ext_resource type="PackedScene" uid="uid://n1ykrcw1x5mr" path="res://Assets/Prefabs/playerbullet.tscn" id="2_l1p0p"]
+[ext_resource type="Script" path="res://Assets/Scripts/player_shoot_controller.gd" id="3_d8k6a"]
+[ext_resource type="PackedScene" uid="uid://n1ykrcw1x5mr" path="res://Assets/Prefabs/playerbullet.tscn" id="4_fs4tq"]
 [ext_resource type="Texture2D" uid="uid://de77lo0fj5tc4" path="res://Assets/Sprites/Player/gun00.png" id="4_lrkkm"]
+[ext_resource type="Script" path="res://Assets/Scripts/player_movement_controller.gd" id="5_g3xk3"]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(557, 582)
 script = ExtResource("1_1xiyr")
-my_bullet = ExtResource("2_l1p0p")
 
 [node name="HealthController" type="Node2D" parent="."]
 script = ExtResource("2_17n08")
+
+[node name="ShootController" type="Node2D" parent="."]
+script = ExtResource("3_d8k6a")
+my_bullet = ExtResource("4_fs4tq")
+
+[node name="ShotCooldown" type="Timer" parent="ShootController"]
+wait_time = 0.3
+one_shot = true
+
+[node name="MovementController" type="Node2D" parent="."]
+script = ExtResource("5_g3xk3")
+speed = Vector2(300, 200)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_aqs1h")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(6, -36, 12, -11, 36, 3, 48, -5, 45, 23, 41, 19, 13, 26, 6, 36, -6, 36, -13, 26, -42, 19, -44, 24, -48, -5, -36, 3, -11, -12, -7, -36)
-
-[node name="ShotCooldown" type="Timer" parent="."]
-wait_time = 0.3
-one_shot = true
 
 [node name="LeftGun" type="Marker2D" parent="."]
 z_index = -1
@@ -42,4 +51,5 @@ texture = ExtResource("4_lrkkm")
 
 [connection signal="get_sprite" from="HealthController" to="." method="_on_health_controller_get_sprite"]
 [connection signal="kill_parent" from="HealthController" to="." method="_on_health_controller_kill_parent"]
-[connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]
+[connection signal="get_guns" from="ShootController" to="." method="_on_shoot_controller_get_guns"]
+[connection signal="timeout" from="ShootController/ShotCooldown" to="ShootController" method="_on_shot_cooldown_timeout"]

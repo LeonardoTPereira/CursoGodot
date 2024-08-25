@@ -1,18 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://djw7f07r866ia"]
+[gd_scene load_steps=8 format=3 uid="uid://djw7f07r866ia"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/enemy.gd" id="1_mt7ok"]
 [ext_resource type="Texture2D" uid="uid://dy2icsx3jrm1c" path="res://Assets/Sprites/Enemy/enemyRed1.png" id="1_txl2q"]
 [ext_resource type="PackedScene" uid="uid://c2eja275c3pdl" path="res://Assets/Prefabs/enemybullet.tscn" id="2_gkeo0"]
 [ext_resource type="Texture2D" uid="uid://btf2w604c2ue0" path="res://Assets/Sprites/Player/gun02.png" id="2_wjkvd"]
-[ext_resource type="Script" path="res://Assets/Scripts/living_unit.gd" id="3_nvmw0"]
+[ext_resource type="Script" path="res://Assets/Scripts/health_controller.gd" id="3_nvmw0"]
+[ext_resource type="Script" path="res://Assets/Scripts/shoot_controller.gd" id="4_0gfbg"]
+[ext_resource type="Script" path="res://Assets/Scripts/movement_controller.gd" id="5_qn3ax"]
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_mt7ok")
-my_bullet = ExtResource("2_gkeo0")
 
 [node name="HealthController" type="Node2D" parent="."]
 scale = Vector2(1.17613, 1)
 script = ExtResource("3_nvmw0")
+
+[node name="ShootController" type="Node2D" parent="."]
+script = ExtResource("4_0gfbg")
+my_bullet = ExtResource("2_gkeo0")
+
+[node name="ShotCooldown" type="Timer" parent="ShootController"]
+autostart = true
+
+[node name="MovementController" type="Node2D" parent="."]
+script = ExtResource("5_qn3ax")
+speed = Vector2(0, 100)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_txl2q")
@@ -38,9 +50,7 @@ scale = Vector2(0.5, 0.5)
 [node name="Sprite2D" type="Sprite2D" parent="RightGun"]
 texture = ExtResource("2_wjkvd")
 
-[node name="ShotCooldown" type="Timer" parent="."]
-autostart = true
-
 [connection signal="get_sprite" from="HealthController" to="." method="_on_health_controller_get_sprite"]
 [connection signal="kill_parent" from="HealthController" to="." method="_on_health_controller_kill_parent"]
-[connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]
+[connection signal="get_guns" from="ShootController" to="." method="_on_shoot_controller_get_guns"]
+[connection signal="timeout" from="ShootController/ShotCooldown" to="ShootController" method="_on_shot_cooldown_timeout"]
