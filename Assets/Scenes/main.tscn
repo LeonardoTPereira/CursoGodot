@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://r3tib2omul8d"]
+[gd_scene load_steps=5 format=3 uid="uid://r3tib2omul8d"]
 
 [ext_resource type="PackedScene" uid="uid://ony5f5s8ewhc" path="res://Assets/Prefabs/player.tscn" id="1_o56t8"]
 [ext_resource type="PackedScene" uid="uid://djw7f07r866ia" path="res://Assets/Prefabs/enemy.tscn" id="2_ruhu8"]
+[ext_resource type="PackedScene" uid="uid://d1i50f743ytyc" path="res://Assets/Prefabs/background.tscn" id="3_0uba3"]
+[ext_resource type="AudioStream" uid="uid://cwl84nfq7sdwo" path="res://Assets/Sounds/Music/Space Fighter Loop.mp3" id="7_gbblo"]
 
 [node name="Main" type="Node2D"]
 
@@ -9,3 +11,14 @@
 
 [node name="Enemy" parent="." instance=ExtResource("2_ruhu8")]
 position = Vector2(790, 65)
+
+[node name="Background" parent="." instance=ExtResource("3_0uba3")]
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+energy = 0.3
+blend_mode = 1
+range_layer_min = -10
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_gbblo")
+autoplay = true

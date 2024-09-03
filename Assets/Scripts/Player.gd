@@ -3,16 +3,21 @@ extends CharacterBody2D
 
 var sprite: Sprite2D
 var sprite_rect: Rect2
+var health_controller: HealthController
 
 
 func _ready():
 	sprite = $Sprite2D
 	sprite_rect = sprite.get_rect()
+	health_controller = $HealthController
+
+
+func hit(damage):
+	health_controller.hit(damage)
 
 
 func _physics_process(_delta):
 	velocity = $MovementController.get_velocity()
-	print(velocity)
 	move_and_slide()
 	check_bounds_and_clamp_position()
 

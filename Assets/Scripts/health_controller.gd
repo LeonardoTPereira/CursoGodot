@@ -2,7 +2,9 @@ class_name HealthController
 extends Node2D
 
 signal get_sprite
+signal get_material
 signal kill_parent
+signal disable_node
 @export var health: int = 1
 var sprite: Sprite2D
 
@@ -11,15 +13,47 @@ func set_sprite(_sprite: Sprite2D):
 	sprite = _sprite
 
 
+func set_my_material(_material: Material):
+	material = _material
+
+
 func _ready():
+	get_material.emit()
 	get_sprite.emit()
 
 
 func hit(damage):
 	health = max(health-damage, 0)
 	if health == 0:
-		die()
+		start_death()
 		return
+	sprite.modulate = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	sprite.modulate = Color.WHITE
+
+
+func set_percent(percentage: float) -> void:
+	material.set_shader_parameter('percentage', percentage)
+
+
+func burn():
+	var texture = NoiseTexture2D.new()
+	var noise = FastNoiseLite.new()
+	noise.noise_type = FastNoiseLite.TYPE_PERLIN
+	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
+	noise.frequency = 0.032
+	texture.noise = noise
+	await texture.changed
+	material.set_shader_parameter("burn_texture", texture)
+	var tween = create_tween()
+	tween.tween_method(set_percent, 1.0, 0.0, 0.5)
+	tween.tween_callback(die)
+
+
+func start_death():
+	disable_node.emit()
+	await get_tree().process_frame
+	burn()
 
 
 func die():

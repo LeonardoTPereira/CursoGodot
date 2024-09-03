@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmluiq3jjdr6l"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/muzzle_flash.gd" id="1_i6f25"]
+
+[sub_resource type="Curve" id="Curve_noear"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 281.773), 0.0, 0.0, 0, 0, Vector2(0.996377, -262.413), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_brjs0"]
+_data = [Vector2(0, 0.962209), 0.0, 0.0, 0, 0, Vector2(1, 0.154433), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+z_index = -2
+position = Vector2(746, 354)
+emitting = false
+amount = 6
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 100.0
+angle_max = 180.0
+angle_curve = SubResource("Curve_noear")
+scale_amount_min = 6.0
+scale_amount_max = 12.0
+scale_amount_curve = SubResource("Curve_brjs0")
+color = Color(0, 0.88002, 0.880446, 1)
+script = ExtResource("1_i6f25")

@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://duhpijt7noq7s"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/burn.gdshader" id="1_8onvo"]
+
+[resource]
+shader = ExtResource("1_8onvo")
+shader_parameter/percentage = 1.0
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05

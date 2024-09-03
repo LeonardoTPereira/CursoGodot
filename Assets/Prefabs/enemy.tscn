@@ -1,23 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://djw7f07r866ia"]
+[gd_scene load_steps=10 format=3 uid="uid://djw7f07r866ia"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/enemy.gd" id="1_mt7ok"]
+[ext_resource type="Material" uid="uid://duhpijt7noq7s" path="res://Assets/Materials/burn_material.tres" id="1_q872i"]
 [ext_resource type="Texture2D" uid="uid://dy2icsx3jrm1c" path="res://Assets/Sprites/Enemy/enemyRed1.png" id="1_txl2q"]
 [ext_resource type="PackedScene" uid="uid://c2eja275c3pdl" path="res://Assets/Prefabs/enemybullet.tscn" id="2_gkeo0"]
 [ext_resource type="Texture2D" uid="uid://btf2w604c2ue0" path="res://Assets/Sprites/Player/gun02.png" id="2_wjkvd"]
 [ext_resource type="Script" path="res://Assets/Scripts/health_controller.gd" id="3_nvmw0"]
 [ext_resource type="Script" path="res://Assets/Scripts/shoot_controller.gd" id="4_0gfbg"]
+[ext_resource type="PackedScene" uid="uid://dp1ff5gsb1ux" path="res://Assets/Prefabs/red_muzzle_flash.tscn" id="5_42lia"]
 [ext_resource type="Script" path="res://Assets/Scripts/movement_controller.gd" id="5_qn3ax"]
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+material = ExtResource("1_q872i")
 script = ExtResource("1_mt7ok")
 
 [node name="HealthController" type="Node2D" parent="."]
-scale = Vector2(1.17613, 1)
+use_parent_material = true
 script = ExtResource("3_nvmw0")
 
 [node name="ShootController" type="Node2D" parent="."]
 script = ExtResource("4_0gfbg")
 my_bullet = ExtResource("2_gkeo0")
+my_muzzle = ExtResource("5_42lia")
 
 [node name="ShotCooldown" type="Timer" parent="ShootController"]
 autostart = true
@@ -27,6 +31,7 @@ script = ExtResource("5_qn3ax")
 speed = Vector2(0, 100)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
 texture = ExtResource("1_txl2q")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -34,22 +39,28 @@ polygon = PackedVector2Array(10, -24, 12, -33, 28, -40, 44, -16, 24, 41, 12, 36,
 
 [node name="LeftGun" type="Marker2D" parent="."]
 z_index = -1
+use_parent_material = true
 position = Vector2(-5, 18)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="LeftGun"]
+use_parent_material = true
 texture = ExtResource("2_wjkvd")
 
 [node name="RightGun" type="Marker2D" parent="."]
 z_index = -1
+use_parent_material = true
 position = Vector2(5, 18)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="RightGun"]
+use_parent_material = true
 texture = ExtResource("2_wjkvd")
 
+[connection signal="disable_node" from="HealthController" to="." method="_on_health_controller_disable_node"]
+[connection signal="get_material" from="HealthController" to="." method="_on_health_controller_get_material"]
 [connection signal="get_sprite" from="HealthController" to="." method="_on_health_controller_get_sprite"]
 [connection signal="kill_parent" from="HealthController" to="." method="_on_health_controller_kill_parent"]
 [connection signal="get_guns" from="ShootController" to="." method="_on_shoot_controller_get_guns"]

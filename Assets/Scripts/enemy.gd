@@ -30,3 +30,13 @@ func _on_health_controller_kill_parent():
 func _on_shoot_controller_get_guns():
 	var guns : Array[Marker2D] = [$LeftGun, $RightGun]
 	$ShootController.set_guns(guns)
+
+
+func _on_health_controller_get_material():
+	material = material.duplicate()
+	$HealthController.set_my_material(material)
+
+
+func _on_health_controller_disable_node():
+	$CollisionPolygon2D.set_deferred("disabled", true)
+	shoot_controller.stop_shooting()

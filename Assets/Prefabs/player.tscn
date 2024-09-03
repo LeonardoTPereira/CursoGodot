@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ony5f5s8ewhc"]
+[gd_scene load_steps=9 format=3 uid="uid://ony5f5s8ewhc"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player.gd" id="1_1xiyr"]
 [ext_resource type="Script" path="res://Assets/Scripts/health_controller.gd" id="2_17n08"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://n1ykrcw1x5mr" path="res://Assets/Prefabs/playerbullet.tscn" id="4_fs4tq"]
 [ext_resource type="Texture2D" uid="uid://de77lo0fj5tc4" path="res://Assets/Sprites/Player/gun00.png" id="4_lrkkm"]
 [ext_resource type="Script" path="res://Assets/Scripts/player_movement_controller.gd" id="5_g3xk3"]
+[ext_resource type="PackedScene" uid="uid://dmluiq3jjdr6l" path="res://Assets/Prefabs/blue_muzzle_flash.tscn" id="5_rkqah"]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(557, 582)
@@ -18,6 +19,7 @@ script = ExtResource("2_17n08")
 [node name="ShootController" type="Node2D" parent="."]
 script = ExtResource("3_d8k6a")
 my_bullet = ExtResource("4_fs4tq")
+my_muzzle = ExtResource("5_rkqah")
 
 [node name="ShotCooldown" type="Timer" parent="ShootController"]
 wait_time = 0.3

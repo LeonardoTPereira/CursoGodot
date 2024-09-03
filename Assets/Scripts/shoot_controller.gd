@@ -3,6 +3,7 @@ extends Node2D
 
 signal get_guns
 @export var my_bullet: PackedScene
+@export var my_muzzle: PackedScene
 var can_shoot: bool
 var guns: Array[Marker2D]
 
@@ -27,10 +28,18 @@ func manage_shoot():
 	can_shoot = false
 
 
+func stop_shooting():
+	$ShotCooldown.stop()
+	can_shoot = false
+
+
 func shoot(gun):
 	var bullet := my_bullet.instantiate() as Bullet
 	bullet.position = gun.global_position
 	get_tree().current_scene.add_child(bullet)
+	var muzzle_flash := my_muzzle.instantiate() as MuzzleParticle
+	muzzle_flash.position = gun.global_position
+	get_tree().current_scene.add_child(muzzle_flash)
 
 
 func set_guns(_guns: Array[Marker2D]):

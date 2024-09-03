@@ -1,0 +1,311 @@
+[gd_scene load_steps=15 format=3 uid="uid://d1i50f743ytyc"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/ParallaxBackground.gd" id="1_tnsl3"]
+[ext_resource type="Texture2D" uid="uid://c88llfigdrn3j" path="res://Assets/Sprites/Background/blue.png" id="2_c7vlg"]
+[ext_resource type="Texture2D" uid="uid://cuoweb6n1dlja" path="res://Assets/Sprites/Background/Planets/planet00.png" id="3_xwhtc"]
+[ext_resource type="Texture2D" uid="uid://b3t8l5w6tc8d1" path="res://Assets/Sprites/Background/Planets/planet01.png" id="4_xv3tn"]
+[ext_resource type="Texture2D" uid="uid://crpk7npjiqqfy" path="res://Assets/Sprites/Background/Planets/planet02.png" id="5_ywrn7"]
+[ext_resource type="Texture2D" uid="uid://cudjh14i8gn7d" path="res://Assets/Sprites/Background/Planets/planet03.png" id="6_drxps"]
+[ext_resource type="Texture2D" uid="uid://4ulmtluhj7en" path="res://Assets/Sprites/Background/Planets/planet04.png" id="7_fdoyx"]
+[ext_resource type="Texture2D" uid="uid://vy3cwutlpf2b" path="res://Assets/Sprites/Background/Planets/planet05.png" id="8_sadtp"]
+[ext_resource type="Texture2D" uid="uid://b7kcq4dnw61pl" path="res://Assets/Sprites/Background/Planets/planet06.png" id="9_uk6ow"]
+[ext_resource type="Texture2D" uid="uid://y78bd6adq2fm" path="res://Assets/Sprites/Background/Planets/planet07.png" id="10_idmmn"]
+[ext_resource type="Texture2D" uid="uid://bkddxm51wiow6" path="res://Assets/Sprites/Background/Planets/planet08.png" id="11_jcmcr"]
+[ext_resource type="Texture2D" uid="uid://hgd6yy6yib17" path="res://Assets/Sprites/Background/Planets/planet09.png" id="12_n7bvj"]
+
+[sub_resource type="Gradient" id="Gradient_chgfe"]
+offsets = PackedFloat32Array(0, 0.68231)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ov40v"]
+gradient = SubResource("Gradient_chgfe")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Background" type="ParallaxBackground"]
+layer = -1
+script = ExtResource("1_tnsl3")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1080, 720)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(640, 360)
+scale = Vector2(5, 2.8125)
+texture = ExtResource("2_c7vlg")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(0, 9600)
+
+[node name="BluePlanet" type="Sprite2D" parent="ParallaxLayer2"]
+modulate = Color(0.834614, 0.834614, 0.834614, 1)
+z_index = -10
+position = Vector2(304, -496)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_xwhtc")
+
+[node name="PointLight2D" type="PointLight2D" parent="ParallaxLayer2/BluePlanet"]
+z_index = 1
+position = Vector2(8, -32)
+scale = Vector2(2, 2)
+color = Color(0.4357, 0.725613, 0.685486, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="ParallaxLayer2/BluePlanet"]
+z_index = 1
+position = Vector2(-8, 38424)
+scale = Vector2(2, 2)
+color = Color(0.4357, 0.725613, 0.685486, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PurplePlanet" type="Sprite2D" parent="ParallaxLayer2"]
+modulate = Color(0.74558, 0.74558, 0.74558, 1)
+z_index = -10
+position = Vector2(1391, -1362)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_xv3tn")
+
+[node name="PointLight2D2" type="PointLight2D" parent="ParallaxLayer2/PurplePlanet"]
+position = Vector2(-40, 36)
+scale = Vector2(2, 2)
+color = Color(0.574718, 0.529283, 0.927267, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PointLight2D3" type="PointLight2D" parent="ParallaxLayer2/PurplePlanet"]
+position = Vector2(44, 38380)
+scale = Vector2(2, 2)
+color = Color(0.574718, 0.529283, 0.927267, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="RedPlanet" type="Sprite2D" parent="ParallaxLayer2"]
+modulate = Color(0.74558, 0.74558, 0.74558, 1)
+z_index = -10
+position = Vector2(381, -4201)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_ywrn7")
+
+[node name="PointLight2D3" type="PointLight2D" parent="ParallaxLayer2/RedPlanet"]
+position = Vector2(0, -72)
+scale = Vector2(2, 2)
+color = Color(0.64142, 0.245404, 0.285938, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PointLight2D4" type="PointLight2D" parent="ParallaxLayer2/RedPlanet"]
+position = Vector2(-40, 38396)
+scale = Vector2(2, 2)
+color = Color(0.64142, 0.245404, 0.285938, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="Blue2Planet" type="Sprite2D" parent="ParallaxLayer2"]
+modulate = Color(0.74558, 0.74558, 0.74558, 1)
+z_index = -10
+position = Vector2(1125, -2845)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_drxps")
+
+[node name="PointLight2D4" type="PointLight2D" parent="ParallaxLayer2/Blue2Planet"]
+position = Vector2(-20, 12)
+scale = Vector2(2, 2)
+color = Color(0.381424, 0.527122, 0.65288, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PointLight2D5" type="PointLight2D" parent="ParallaxLayer2/Blue2Planet"]
+position = Vector2(16, 38364)
+scale = Vector2(2, 2)
+color = Color(0.381424, 0.527122, 0.65288, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="GrayPlanet" type="Sprite2D" parent="ParallaxLayer2"]
+modulate = Color(0.74558, 0.74558, 0.74558, 1)
+z_index = -10
+position = Vector2(554, -2095)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_fdoyx")
+
+[node name="PointLight2D5" type="PointLight2D" parent="ParallaxLayer2/GrayPlanet"]
+position = Vector2(28, -28)
+scale = Vector2(2, 2)
+color = Color(0.408115, 0.394699, 0.457612, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PointLight2D6" type="PointLight2D" parent="ParallaxLayer2/GrayPlanet"]
+position = Vector2(28, 38400)
+scale = Vector2(2, 2)
+color = Color(0.408115, 0.394699, 0.457612, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="YellowPlanet" type="Sprite2D" parent="ParallaxLayer2"]
+modulate = Color(0.74558, 0.74558, 0.74558, 1)
+z_index = -10
+position = Vector2(1285, -3882)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_sadtp")
+
+[node name="PointLight2D6" type="PointLight2D" parent="ParallaxLayer2/YellowPlanet"]
+position = Vector2(32, 8)
+scale = Vector2(2, 2)
+color = Color(0.550213, 0.389345, 0.309061, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PointLight2D7" type="PointLight2D" parent="ParallaxLayer2/YellowPlanet"]
+position = Vector2(-16, 38424)
+scale = Vector2(2, 2)
+color = Color(0.550213, 0.389345, 0.309061, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="Red2Planet" type="Sprite2D" parent="ParallaxLayer2"]
+modulate = Color(0.74558, 0.74558, 0.74558, 1)
+z_index = -10
+position = Vector2(944, -5444)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_uk6ow")
+
+[node name="PointLight2D7" type="PointLight2D" parent="ParallaxLayer2/Red2Planet"]
+position = Vector2(28, 16)
+scale = Vector2(2, 2)
+color = Color(0.524927, 0.328887, 0.364985, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PointLight2D8" type="PointLight2D" parent="ParallaxLayer2/Red2Planet"]
+position = Vector2(-4, 38404)
+scale = Vector2(2, 2)
+color = Color(0.524927, 0.328887, 0.364985, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="GreenPlanet" type="Sprite2D" parent="ParallaxLayer2"]
+modulate = Color(0.74558, 0.74558, 0.74558, 1)
+z_index = -10
+position = Vector2(1519, -6342)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_idmmn")
+
+[node name="PointLight2D8" type="PointLight2D" parent="ParallaxLayer2/GreenPlanet"]
+position = Vector2(20, 16)
+scale = Vector2(2, 2)
+color = Color(0.305665, 0.566066, 0.656917, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PointLight2D9" type="PointLight2D" parent="ParallaxLayer2/GreenPlanet"]
+position = Vector2(-4, 38396)
+scale = Vector2(2, 2)
+color = Color(0.305665, 0.566066, 0.656917, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="Red3Planet" type="Sprite2D" parent="ParallaxLayer2"]
+modulate = Color(0.74558, 0.74558, 0.74558, 1)
+z_index = -10
+position = Vector2(47, -7078)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("11_jcmcr")
+
+[node name="PointLight2D9" type="PointLight2D" parent="ParallaxLayer2/Red3Planet"]
+position = Vector2(-28, -12)
+scale = Vector2(2, 2)
+color = Color(0.752956, 0.316035, 0.268199, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PointLight2D10" type="PointLight2D" parent="ParallaxLayer2/Red3Planet"]
+position = Vector2(-28, 38388)
+scale = Vector2(2, 2)
+color = Color(0.752956, 0.316035, 0.268199, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="Purple2Planet" type="Sprite2D" parent="ParallaxLayer2"]
+modulate = Color(0.74558, 0.74558, 0.74558, 1)
+z_index = -10
+position = Vector2(1191, -8279)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_n7bvj")
+
+[node name="PointLight2D10" type="PointLight2D" parent="ParallaxLayer2/Purple2Planet"]
+position = Vector2(24, -24)
+scale = Vector2(2, 2)
+color = Color(0.443959, 0.299682, 0.670424, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
+
+[node name="PointLight2D11" type="PointLight2D" parent="ParallaxLayer2/Purple2Planet"]
+position = Vector2(-12, 38420)
+scale = Vector2(2, 2)
+color = Color(0.443959, 0.299682, 0.670424, 1)
+energy = 0.7
+range_z_min = -9
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_ov40v")
+texture_scale = 32.0
