@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1i50f743ytyc"]
+[gd_scene load_steps=16 format=3 uid="uid://d1i50f743ytyc"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/ParallaxBackground.gd" id="1_tnsl3"]
 [ext_resource type="Texture2D" uid="uid://c88llfigdrn3j" path="res://Assets/Sprites/Background/blue.png" id="2_c7vlg"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://y78bd6adq2fm" path="res://Assets/Sprites/Background/Planets/planet07.png" id="10_idmmn"]
 [ext_resource type="Texture2D" uid="uid://bkddxm51wiow6" path="res://Assets/Sprites/Background/Planets/planet08.png" id="11_jcmcr"]
 [ext_resource type="Texture2D" uid="uid://hgd6yy6yib17" path="res://Assets/Sprites/Background/Planets/planet09.png" id="12_n7bvj"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1hwit"]
 
 [sub_resource type="Gradient" id="Gradient_chgfe"]
 offsets = PackedFloat32Array(0, 0.68231)
@@ -41,6 +43,7 @@ motion_mirroring = Vector2(0, 9600)
 [node name="BluePlanet" type="Sprite2D" parent="ParallaxLayer2"]
 modulate = Color(0.834614, 0.834614, 0.834614, 1)
 z_index = -10
+material = SubResource("CanvasItemMaterial_1hwit")
 position = Vector2(304, -496)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_xwhtc")
@@ -304,7 +307,7 @@ texture_scale = 32.0
 position = Vector2(-12, 38420)
 scale = Vector2(2, 2)
 color = Color(0.443959, 0.299682, 0.670424, 1)
-energy = 0.7
+energy = 1.5
 range_z_min = -9
 range_layer_min = -101
 texture = SubResource("GradientTexture2D_ov40v")

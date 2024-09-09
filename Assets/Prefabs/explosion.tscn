@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://h2ivq13c1d4t"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/explosion.gd" id="1_jsm8s"]
+
+[sub_resource type="Curve" id="Curve_brjs0"]
+_data = [Vector2(0, 0.886628), 0.0, 0.0, 0, 0, Vector2(1, 0.154433), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_2sp6y"]
+colors = PackedColorArray(0.95, 0.712342, 0.1995, 1, 1, 0.34, 0.1, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+z_index = 1
+position = Vector2(746, 354)
+emitting = false
+amount = 100
+lifetime = 0.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.8
+randomness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 300.0
+scale_amount_min = 10.0
+scale_amount_max = 20.0
+scale_amount_curve = SubResource("Curve_brjs0")
+color_ramp = SubResource("Gradient_2sp6y")
+script = ExtResource("1_jsm8s")

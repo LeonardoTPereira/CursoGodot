@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://r3tib2omul8d"]
+
+[ext_resource type="PackedScene" uid="uid://ony5f5s8ewhc" path="res://Assets/Prefabs/player.tscn" id="1_o56t8"]
+[ext_resource type="PackedScene" uid="uid://djw7f07r866ia" path="res://Assets/Prefabs/enemy.tscn" id="2_ruhu8"]
+[ext_resource type="PackedScene" uid="uid://d1i50f743ytyc" path="res://Assets/Prefabs/background.tscn" id="3_0uba3"]
+[ext_resource type="Script" path="res://Assets/Scripts/ui_controller.gd" id="5_pwbm1"]
+[ext_resource type="Theme" uid="uid://chg36xt7sakfg" path="res://Assets/Themes/game_ui.tres" id="6_r22b8"]
+[ext_resource type="AudioStream" uid="uid://cwl84nfq7sdwo" path="res://Assets/Sounds/Music/Space Fighter Loop.mp3" id="7_gbblo"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_o56t8")]
+
+[node name="Enemy" parent="." instance=ExtResource("2_ruhu8")]
+position = Vector2(790, 65)
+
+[node name="Background" parent="." instance=ExtResource("3_0uba3")]
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+energy = 0.3
+blend_mode = 1
+range_layer_min = -10
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_gbblo")
+autoplay = true
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="UIController" type="Control" parent="UI" node_paths=PackedStringArray("player", "enemy")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_pwbm1")
+player = NodePath("../../Player")
+enemy = NodePath("../../Enemy")
+
+[node name="UIContainer" type="CenterContainer" parent="UI/UIController"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 7.975
+anchor_bottom = 2.925
+offset_right = 2.0
+
+[node name="UIVBoxContainer" type="VBoxContainer" parent="UI/UIController/UIContainer"]
+layout_mode = 2
+
+[node name="HPContainer" type="HBoxContainer" parent="UI/UIController/UIContainer/UIVBoxContainer"]
+layout_mode = 2
+
+[node name="HP" type="Label" parent="UI/UIController/UIContainer/UIVBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("6_r22b8")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "HP: "
+
+[node name="HPValue" type="Label" parent="UI/UIController/UIContainer/UIVBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("6_r22b8")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "0"
+
+[node name="ScoreContainer" type="HBoxContainer" parent="UI/UIController/UIContainer/UIVBoxContainer"]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="UI/UIController/UIContainer/UIVBoxContainer/ScoreContainer"]
+layout_mode = 2
+theme = ExtResource("6_r22b8")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Score: "
+
+[node name="ScoreValue" type="Label" parent="UI/UIController/UIContainer/UIVBoxContainer/ScoreContainer"]
+layout_mode = 2
+theme = ExtResource("6_r22b8")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "0 "

@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxb45s3cdn352"]
+
+[ext_resource type="FontFile" uid="uid://dodjj2o3ij5qx" path="res://Assets/Fonts/kenvector_future.ttf" id="1_i6nxw"]
+[ext_resource type="Script" path="res://Assets/Scripts/main_menu.gd" id="1_rl0kc"]
+[ext_resource type="PackedScene" uid="uid://r3tib2omul8d" path="res://Assets/Scenes/main.tscn" id="2_8rjdx"]
+[ext_resource type="Texture2D" uid="uid://o8v2ijf1t3hc" path="res://Assets/Sprites/UI/buttonGreen.png" id="2_aimo8"]
+[ext_resource type="Texture2D" uid="uid://ci5v5ylatbq6k" path="res://Assets/Sprites/UI/buttonRed.png" id="4_e4x7v"]
+
+[sub_resource type="Theme" id="Theme_lk6iw"]
+default_font = ExtResource("1_i6nxw")
+default_font_size = 60
+
+[sub_resource type="Theme" id="Theme_2bq11"]
+default_font = ExtResource("1_i6nxw")
+default_font_size = 48
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.1
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_rl0kc")
+game_scene = ExtResource("2_8rjdx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.907
+offset_bottom = 3.65594
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TitleContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 163.0
+grow_horizontal = 2
+
+[node name="Title" type="Label" parent="TitleContainer"]
+layout_mode = 2
+theme = SubResource("Theme_lk6iw")
+theme_override_colors/font_outline_color = Color(0.64, 0.5504, 0.192, 1)
+theme_override_constants/outline_size = 4
+text = "MAIN MENU"
+
+[node name="ButtonsContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.386
+anchor_right = 1.0
+anchor_bottom = 0.572
+offset_left = 90.0
+offset_top = 0.0799866
+offset_right = -129.0
+offset_bottom = 0.159973
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Play" type="Button" parent="ButtonsContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_2bq11")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.82, 0.041, 1)
+theme_override_colors/icon_pressed_color = Color(0.385493, 0.385492, 0.385492, 1)
+theme_override_colors/icon_hover_color = Color(0.572988, 0.572988, 0.572988, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.621524, 0.621524, 0.621524, 1)
+theme_override_colors/icon_focus_color = Color(0.442911, 0.442911, 0.442911, 1)
+theme_override_colors/icon_disabled_color = Color(0.172833, 0.172833, 0.172833, 1)
+theme_override_constants/outline_size = 2
+text = "Play
+"
+icon = ExtResource("2_aimo8")
+flat = true
+icon_alignment = 1
+
+[node name="Quit" type="Button" parent="ButtonsContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_2bq11")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.82, 0.109333, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0.385493, 0.385492, 0.385492, 1)
+theme_override_colors/icon_hover_color = Color(0.572988, 0.572988, 0.572988, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.621524, 0.621524, 0.621524, 1)
+theme_override_colors/icon_focus_color = Color(0.442911, 0.442911, 0.442911, 1)
+theme_override_colors/icon_disabled_color = Color(0.172833, 0.172833, 0.172833, 1)
+theme_override_constants/outline_size = 2
+text = "Quit"
+icon = ExtResource("4_e4x7v")
+flat = true
+icon_alignment = 1
+
+[connection signal="pressed" from="ButtonsContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="ButtonsContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

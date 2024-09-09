@@ -1,11 +1,13 @@
 class_name HealthController
 extends Node2D
 
+signal health_changed
 signal get_sprite
 signal get_material
 signal kill_parent
 signal disable_node
 @export var health: int = 1
+@export var explosion_particle: PackedScene
 var sprite: Sprite2D
 
 
@@ -20,10 +22,12 @@ func set_my_material(_material: Material):
 func _ready():
 	get_material.emit()
 	get_sprite.emit()
-
+	await get_tree().process_frame
+	health_changed.emit(health)
 
 func hit(damage):
 	health = max(health-damage, 0)
+	health_changed.emit(health)
 	if health == 0:
 		start_death()
 		return
@@ -50,9 +54,16 @@ func burn():
 	tween.tween_callback(die)
 
 
+func explode():
+	var explosion = explosion_particle.instantiate() as ExplosionParticle
+	explosion.global_position = global_position
+	get_tree().current_scene.add_child(explosion)
+
+
 func start_death():
 	disable_node.emit()
 	await get_tree().process_frame
+	explode()
 	burn()
 
 
