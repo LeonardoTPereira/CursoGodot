@@ -1,9 +1,16 @@
 class_name Bullet
 extends Area2D
 
+enum Side {LEFT, RIGHT}
+
 @export var speed:= Vector2(0, 300)
 @export var damage:= 1
+var side: Side
 
+
+func _enter_tree():
+	if side == Side.RIGHT:
+		speed.x *= -1
 
 func _physics_process(delta):
 	position -= delta*speed

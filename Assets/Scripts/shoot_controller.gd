@@ -4,6 +4,7 @@ extends Node2D
 signal get_guns
 @export var my_bullet: PackedScene
 @export var my_muzzle: PackedScene
+@export var muzzle_color: Color
 var can_shoot: bool
 var guns: Array[Marker2D]
 
@@ -21,9 +22,11 @@ func _physics_process(_delta):
 		manage_shoot()
 
 
+#Gambiarra: só funciona para números pares de armas
 func manage_shoot():
-	for gun in guns:
-		shoot(gun)
+	var len_guns = len(guns)
+	for gun_index in range(len_guns):
+		shoot(guns[gun_index], gun_index*2/len_guns)
 	$ShotCooldown.start()
 	can_shoot = false
 
@@ -33,12 +36,14 @@ func stop_shooting():
 	can_shoot = false
 
 
-func shoot(gun):
+func shoot(gun, side):
 	var bullet := my_bullet.instantiate() as Bullet
 	bullet.position = gun.global_position
+	bullet.side = side
 	get_tree().current_scene.add_child(bullet)
 	var muzzle_flash := my_muzzle.instantiate() as MuzzleParticle
 	muzzle_flash.position = gun.global_position
+	muzzle_flash.color = muzzle_color
 	get_tree().current_scene.add_child(muzzle_flash)
 
 

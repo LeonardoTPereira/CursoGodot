@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SpawnList" load_steps=9 format=3 uid="uid://gwvujs27ykhc"]
+
+[ext_resource type="Resource" uid="uid://bqbl3re5gxmdt" path="res://Assets/Resources/intro_stage_formation_1.tres" id="1_c868l"]
+[ext_resource type="Script" path="res://Assets/Scripts/spawn_list.gd" id="1_sod8l"]
+[ext_resource type="Resource" uid="uid://bf6u5y2qb4g0m" path="res://Assets/Resources/intro_stage_formation_2.tres" id="2_x0mns"]
+[ext_resource type="Resource" uid="uid://fu5xn78v0s5o" path="res://Assets/Resources/intro_stage_formation_3.tres" id="3_smc7f"]
+[ext_resource type="Resource" uid="uid://bh46gptx0ajpq" path="res://Assets/Resources/intro_stage_formation_4.tres" id="4_nxfpr"]
+[ext_resource type="Resource" uid="uid://dr3826nep1suk" path="res://Assets/Resources/intro_stage_formation_5.tres" id="5_kelx2"]
+[ext_resource type="Resource" uid="uid://cavukihxk6gjl" path="res://Assets/Resources/intro_stage_formation_6.tres" id="6_3ear6"]
+[ext_resource type="Resource" uid="uid://c65is16q5b85l" path="res://Assets/Resources/intro_stage_formation_7.tres" id="7_pfqbt"]
+
+[resource]
+script = ExtResource("1_sod8l")
+enemy_formations = Array[Resource("res://Assets/Scripts/enemy_formation.gd")]([ExtResource("1_c868l"), ExtResource("2_x0mns"), ExtResource("3_smc7f"), ExtResource("4_nxfpr"), ExtResource("5_kelx2"), ExtResource("6_3ear6"), ExtResource("7_pfqbt")])

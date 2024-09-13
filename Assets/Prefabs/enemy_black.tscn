@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://cbgfn6yp4lqi7"]
+
+[ext_resource type="Material" uid="uid://duhpijt7noq7s" path="res://Assets/Materials/burn_material.tres" id="1_12plj"]
+[ext_resource type="Script" path="res://Assets/Scripts/enemy.gd" id="2_w3enm"]
+[ext_resource type="Script" path="res://Assets/Scripts/health_controller.gd" id="3_2m7ir"]
+[ext_resource type="PackedScene" uid="uid://h2ivq13c1d4t" path="res://Assets/Prefabs/explosion.tscn" id="4_6oyf7"]
+[ext_resource type="Script" path="res://Assets/Scripts/shoot_controller.gd" id="5_1fflv"]
+[ext_resource type="PackedScene" uid="uid://bj2i8wbb1wt86" path="res://Assets/Prefabs/enemyblackbullet.tscn" id="6_2ixnn"]
+[ext_resource type="PackedScene" uid="uid://dp1ff5gsb1ux" path="res://Assets/Prefabs/red_muzzle_flash.tscn" id="7_c3d63"]
+[ext_resource type="Script" path="res://Assets/Scripts/movement_controller.gd" id="8_ltj6x"]
+[ext_resource type="Texture2D" uid="uid://do3rmu7l2t8f4" path="res://Assets/Sprites/Enemy/enemyBlack2.png" id="9_vwuoq"]
+[ext_resource type="Texture2D" uid="uid://btf2w604c2ue0" path="res://Assets/Sprites/Player/gun02.png" id="10_3jkwl"]
+
+[node name="EnemyBlack" type="CharacterBody2D" groups=["Enemy"]]
+material = ExtResource("1_12plj")
+script = ExtResource("2_w3enm")
+score = 100
+
+[node name="HealthController" type="Node2D" parent="."]
+use_parent_material = true
+script = ExtResource("3_2m7ir")
+explosion_particle = ExtResource("4_6oyf7")
+
+[node name="ShootController" type="Node2D" parent="."]
+script = ExtResource("5_1fflv")
+my_bullet = ExtResource("6_2ixnn")
+my_muzzle = ExtResource("7_c3d63")
+muzzle_color = Color(0.775063, 0.775063, 0.775063, 1)
+
+[node name="ShotCooldown" type="Timer" parent="ShootController"]
+wait_time = 1.5
+autostart = true
+
+[node name="MovementController" type="Node2D" parent="."]
+script = ExtResource("8_ltj6x")
+speed = Vector2(0, 100)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("9_vwuoq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(0, -40, 17, -32, 19, -26, 34, -15, 51, -14, 51, -7, 24, 41, 7, 41, 9, 26, -9, 26, -7, 41, -23, 41, -51, -7, -51, -14, -33, -14, -19, -27, -17, -32)
+
+[node name="LeftGun" type="Marker2D" parent="."]
+z_index = -1
+use_parent_material = true
+position = Vector2(-12, 38)
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftGun"]
+use_parent_material = true
+texture = ExtResource("10_3jkwl")
+
+[node name="RightGun" type="Marker2D" parent="."]
+z_index = -1
+use_parent_material = true
+position = Vector2(12, 38)
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="RightGun"]
+use_parent_material = true
+texture = ExtResource("10_3jkwl")
+
+[connection signal="disable_node" from="HealthController" to="." method="_on_health_controller_disable_node"]
+[connection signal="get_material" from="HealthController" to="." method="_on_health_controller_get_material"]
+[connection signal="get_sprite" from="HealthController" to="." method="_on_health_controller_get_sprite"]
+[connection signal="kill_parent" from="HealthController" to="." method="_on_health_controller_kill_parent"]
+[connection signal="get_guns" from="ShootController" to="." method="_on_shoot_controller_get_guns"]
+[connection signal="timeout" from="ShootController/ShotCooldown" to="ShootController" method="_on_shot_cooldown_timeout"]

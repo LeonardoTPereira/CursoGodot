@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj2i8wbb1wt86"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/blackbullet.gd" id="1_t64n5"]
+[ext_resource type="Texture2D" uid="uid://j67h2yt4rwa7" path="res://Assets/Sprites/Bullet/laserBlackSin.png" id="2_ktup4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ubr80"]
+radius = 15.0333
+
+[node name="EnemyBullet" type="Area2D" groups=["EnemyBullet"]]
+position = Vector2(461, 600)
+script = ExtResource("1_t64n5")
+max_horizontal_range = 80
+direction_cooldown = 100.0
+speed = Vector2(60, -300)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
+texture = ExtResource("2_ktup4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ubr80")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

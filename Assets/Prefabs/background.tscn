@@ -29,11 +29,11 @@ layer = -1
 script = ExtResource("1_tnsl3")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-motion_mirroring = Vector2(1080, 720)
+motion_mirroring = Vector2(2560, 2560)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
-position = Vector2(640, 360)
-scale = Vector2(5, 2.8125)
+position = Vector2(1280, 1280)
+scale = Vector2(10, 10)
 texture = ExtResource("2_c7vlg")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]

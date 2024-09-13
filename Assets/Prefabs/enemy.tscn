@@ -25,8 +25,10 @@ explosion_particle = ExtResource("4_5dvqy")
 script = ExtResource("4_0gfbg")
 my_bullet = ExtResource("2_gkeo0")
 my_muzzle = ExtResource("5_42lia")
+muzzle_color = Color(1, 0, 0, 1)
 
 [node name="ShotCooldown" type="Timer" parent="ShootController"]
+wait_time = 1.5
 autostart = true
 
 [node name="MovementController" type="Node2D" parent="."]

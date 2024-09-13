@@ -23,6 +23,7 @@ explosion_particle = ExtResource("3_vqolw")
 script = ExtResource("3_d8k6a")
 my_bullet = ExtResource("4_fs4tq")
 my_muzzle = ExtResource("5_rkqah")
+muzzle_color = Color(0.143706, 0.378591, 1, 1)
 
 [node name="ShotCooldown" type="Timer" parent="ShootController"]
 wait_time = 0.3
@@ -30,7 +31,7 @@ one_shot = true
 
 [node name="MovementController" type="Node2D" parent="."]
 script = ExtResource("5_g3xk3")
-speed = Vector2(300, 200)
+speed = Vector2(600, 600)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_aqs1h")
