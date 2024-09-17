@@ -1,0 +1,164 @@
+[gd_scene load_steps=28 format=3 uid="uid://dtp6k3jprgcow"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/boss.gd" id="1_ebwgu"]
+[ext_resource type="Material" uid="uid://duhpijt7noq7s" path="res://Assets/Materials/burn_material.tres" id="1_orq25"]
+[ext_resource type="Texture2D" uid="uid://bov7yjmvb3dr1" path="res://Assets/Sprites/Boss/Boss.png" id="2_7uyrv"]
+[ext_resource type="Script" path="res://Assets/Scripts/health_controller.gd" id="3_k7rft"]
+[ext_resource type="Script" path="res://Assets/Scripts/animation_tree.gd" id="3_vl1uj"]
+[ext_resource type="PackedScene" uid="uid://h2ivq13c1d4t" path="res://Assets/Prefabs/explosion.tscn" id="4_whikl"]
+
+[sub_resource type="Animation" id="Animation_ryqyj"]
+resource_name = "angry"
+
+[sub_resource type="Animation" id="Animation_0vv6s"]
+resource_name = "charge"
+
+[sub_resource type="Animation" id="Animation_txxvw"]
+resource_name = "die"
+
+[sub_resource type="Animation" id="Animation_bhcwe"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"increase_idle_count"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ywnt0"]
+resource_name = "patrol-sideways"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvglx"]
+_data = {
+"angry": SubResource("Animation_ryqyj"),
+"charge": SubResource("Animation_0vv6s"),
+"die": SubResource("Animation_txxvw"),
+"idle": SubResource("Animation_bhcwe"),
+"patrol-sideways": SubResource("Animation_ywnt0")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fhnxk"]
+animation = &"angry"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b4n0n"]
+animation = &"charge"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ktsy3"]
+animation = &"die"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5wkh4"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gggul"]
+animation = &"patrol-sideways"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ewawe"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ob86"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"patrol"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5gffr"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"charge"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvg6r"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yo5lv"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sm54s"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"angry"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rdc6l"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iskf4"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i5w2t"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_up1bh"]
+states/End/position = Vector2(705, 100)
+states/Start/position = Vector2(237, 100)
+states/angry/node = SubResource("AnimationNodeAnimation_fhnxk")
+states/angry/position = Vector2(503, 210)
+states/charge/node = SubResource("AnimationNodeAnimation_b4n0n")
+states/charge/position = Vector2(315, 210)
+states/die/node = SubResource("AnimationNodeAnimation_ktsy3")
+states/die/position = Vector2(565, 100)
+states/idle/node = SubResource("AnimationNodeAnimation_5wkh4")
+states/idle/position = Vector2(420, 100)
+states/patrol-sideways/node = SubResource("AnimationNodeAnimation_gggul")
+states/patrol-sideways/position = Vector2(420, -13)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ewawe"), "idle", "patrol-sideways", SubResource("AnimationNodeStateMachineTransition_8ob86"), "idle", "charge", SubResource("AnimationNodeStateMachineTransition_5gffr"), "patrol-sideways", "idle", SubResource("AnimationNodeStateMachineTransition_lvg6r"), "charge", "idle", SubResource("AnimationNodeStateMachineTransition_yo5lv"), "idle", "angry", SubResource("AnimationNodeStateMachineTransition_sm54s"), "die", "End", SubResource("AnimationNodeStateMachineTransition_rdc6l"), "angry", "idle", SubResource("AnimationNodeStateMachineTransition_iskf4"), "idle", "die", SubResource("AnimationNodeStateMachineTransition_i5w2t")]
+graph_offset = Vector2(60, -9.283)
+
+[node name="Boss" type="CharacterBody2D" groups=["Enemy"]]
+material = ExtResource("1_orq25")
+script = ExtResource("1_ebwgu")
+max_horizontal_range = 400
+max_vertical_range = 600
+move_speed = Vector2(300, -600)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+position = Vector2(619, 193)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_7uyrv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(671, 27, 711, 60, 734, 128, 766, 151, 726, 146, 745, 252, 743, 331, 739, 275, 715, 194, 701, 198, 693, 280, 679, 329, 689, 263, 681, 214, 677, 288, 660, 287, 660, 255, 652, 257, 652, 281, 640, 288, 639, 306, 619, 360, 598, 305, 597, 287, 585, 278, 585, 256, 576, 256, 575, 287, 559, 287, 558, 221, 551, 269, 561, 332, 543, 274, 537, 197, 529, 191, 499, 275, 496, 334, 489, 253, 501, 149, 468, 151, 503, 130, 529, 56, 576, 26, 609, 24, 586, 47, 619, 28, 650, 48, 629, 24)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gvglx")
+}
+playback_default_blend_time = 0.1
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_up1bh")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/angry = false
+parameters/conditions/charge = false
+parameters/conditions/dead = false
+parameters/conditions/idle = false
+parameters/conditions/patrol = false
+script = ExtResource("3_vl1uj")
+
+[node name="HealthController" type="Node2D" parent="."]
+script = ExtResource("3_k7rft")
+explosion_particle = ExtResource("4_whikl")
+
+[connection signal="disable_node" from="HealthController" to="." method="_on_health_controller_disable_node"]
+[connection signal="get_material" from="HealthController" to="." method="_on_health_controller_get_material"]
+[connection signal="get_sprite" from="HealthController" to="." method="_on_health_controller_get_sprite"]
+[connection signal="kill_parent" from="HealthController" to="." method="_on_health_controller_kill_parent"]

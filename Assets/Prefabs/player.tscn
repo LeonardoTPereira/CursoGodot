@@ -16,7 +16,6 @@ script = ExtResource("1_1xiyr")
 
 [node name="HealthController" type="Node2D" parent="."]
 script = ExtResource("2_17n08")
-health = 5
 explosion_particle = ExtResource("3_vqolw")
 
 [node name="ShootController" type="Node2D" parent="."]

@@ -2,9 +2,9 @@ class_name Enemy
 extends CharacterBody2D
 
 signal defeated
+@export var score: int
 var health_controller: HealthController
 var shoot_controller: ShootController
-@export var score: int
 
 func _physics_process(_delta):
 	velocity = $MovementController.get_velocity()

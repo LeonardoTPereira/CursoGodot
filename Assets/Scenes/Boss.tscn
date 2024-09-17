@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bacau5fpsf73v"]
+
+[ext_resource type="PackedScene" uid="uid://dtp6k3jprgcow" path="res://Assets/Prefabs/boss.tscn" id="1_qacpr"]
+[ext_resource type="PackedScene" uid="uid://ony5f5s8ewhc" path="res://Assets/Prefabs/player.tscn" id="2_6i6jd"]
+
+[node name="Boss" type="Node2D"]
+
+[node name="Boss" parent="." instance=ExtResource("1_qacpr")]
+
+[node name="Player" parent="." instance=ExtResource("2_6i6jd")]

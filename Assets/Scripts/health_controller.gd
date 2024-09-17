@@ -6,9 +6,10 @@ signal get_sprite
 signal get_material
 signal kill_parent
 signal disable_node
-@export var health: int = 1
+@export var max_health: int = 1
 @export var explosion_particle: PackedScene
 var sprite: Sprite2D
+@onready var health = max_health
 
 
 func set_sprite(_sprite: Sprite2D):
